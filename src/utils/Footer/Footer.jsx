@@ -2,19 +2,22 @@ import React from "react";
 import { Logo } from "../Logo/Logo";
 
 import "./Footer.scss";
+import { getFetchData } from "@/lib/helpers/DataFetch";
+import { useLanguageContent } from "@/lib/helpers/useLanguageContent";
+import { URL_FOOTER } from "@/lib/helpers/DataUrls";
+import { DataProvider } from "@/lib/providers/DataProvider/DataProvider";
+import FooterContent from "./FooterContent";
 
-export default function Footer() {
+export default async function Footer() {
+  const preparedData = await getFetchData(URL_FOOTER);
+  const data = useLanguageContent(preparedData, "en");
+
+  console.log(data);
+  
+
   return (
-    <footer className="footer">
-      <h1 className="super-text">RTRTS TMPLATE*</h1>
-      <div className="bottom container">
-        <Logo className="footer__logo" />
-        <span className="micro-text shadow footer__description">
-          *retrats template - the ideal for creative work, featuring stunning
-          components, video backgrounds, and fluid functionality. Retrats is a
-          starter that propels you forward
-        </span>
-      </div>
-    </footer>
+      <DataProvider data={data}>
+        <FooterContent />
+      </DataProvider>
   );
 }

@@ -1,61 +1,49 @@
 @import "./mixins";
 
 %h1 {
-  font-family: var(--font-neue-haas-display), sans-serif;
+  font-family: var(--font-hoves-pro), sans-serif;
   font-size: 2.8vw;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 142%;
   text-transform: uppercase;
   letter-spacing: normal;
-
-  @include mq() {
-    font-size: 9.4vw;
-  }
 }
 
 .super-text {
-  font-family: var(--font-neue-haas-display), sans-serif;
+  font-family: var(--font-hoves-pro), sans-serif;
   font-size: 4.7vw;
   font-style: bold;
   line-height: 90%;
   text-transform: uppercase;
   letter-spacing: normal;
-
-  @include mq() {
-    font-size: 11vw;
-  }
 }
 
 %h2 {
-  font-family: var(--font-neue-haas-display), sans-serif;
+  font-family: var(--font-hoves-pro), sans-serif;
   font-size: 2vw;
   font-style: bold;
   font-weight: normal;
   line-height: normal;
   letter-spacing: normal;
-
-  @include mq() {
-    font-size: 6.4vw;
-  }
 }
 
 %body-text {
-  font-family: var(--font-neue-haas-display), sans-serif;
-  font-size: 1.5vw;
+  font-family: var(--font-hoves-pro), sans-serif;
+  font-size: VW(16);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 140%;
   letter-spacing: -0.01vw;
   
-  @include mq() {
-    letter-spacing: -0.4vw;
-    font-size: 4.7vw;
+  @include forMobile {
+    font-size: VW(14, $mobile);
+    letter-spacing: normal;
   }
 }
 
 .small-text {
-  font-family: var(--font-neue-haas-display), sans-serif;
+  font-family: var(--font-hoves-pro), sans-serif;
   font-size: 1vw;
   font-style: normal;
   font-weight: 400;
@@ -65,26 +53,33 @@
 
 %link {
   @extend %body-text;
-  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .bold {
   font-weight: 700;
 }
 
+.light {
+  font-weight: 300;
+}
+
+.uppercase {
+  text-transform: uppercase
+}
+
 .body {
   @extend %body-text;
 
+  h1 {
+    @extend %h1;
+  }
 
-h1 {
-  @extend %h1;
-}
+  h2 {
+    @extend %h2;
+  }
 
-h2 {
-  @extend %h2;
-}
-
-a {
-  @extend %link;
-}
+  a {
+    @extend %link;
+  }
 }

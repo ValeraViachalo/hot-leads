@@ -1,0 +1,299 @@
+import React, { useContext, useState, useEffect } from "react";
+import "./BuySell.scss";
+import { DataContext } from "@/lib/providers/DataProvider/context";
+import Image from "next/image";
+import classNames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import { anim, animModal } from "@/lib/helpers/anim";
+import Link from "next/link";
+import { HoverAnim } from "@/utils/HoverAnim/HoverAnim";
+
+export default function BuySell({
+  background,
+  isActiveModal,
+  setisActiveModal,
+}) {
+  const { data: fullData } = useContext(DataContext);
+  const { buysell: data } = fullData;
+  const { buy } = data;
+  const { sell } = data;
+
+  const handleClick = (type) => {
+    if (isActiveModal.active && isActiveModal.type === type) {
+      return setisActiveModal({ active: false, type });
+    } else {
+      return setisActiveModal({ active: true, type });
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isActiveModal.active) {
+        setisActiveModal({ active: false, type: isActiveModal.type });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isActiveModal, setisActiveModal]);
+
+  return (
+    <section className="buy-sell">
+      <div
+        className={classNames("buy-sell__background", {
+          "buy-sell__background--active": background,
+        })}
+      >
+        <Image src="/images/buysell-bg.png" alt="" fill />
+      </div>
+
+      <div className="buy-sell__mobile-background buy-sell__mobile-background--top">
+        <Image src="/images/buysell/mobilebg1.png" alt="" fill />
+      </div>
+      <div className="buy-sell__mobile-background buy-sell__mobile-background--bottom">
+        <Image src="/images/buysell/mobilebg2.png" alt="" fill />
+      </div>
+      <div className="buy-sell__table buy-sell__table--buy">
+        <h1 className="fz--70 fz--mobile-54 uppercase title">{buy.title}</h1>
+        <div className="list">
+          {buy.list.map((item, index) => (
+            <div
+              key={index}
+              className="item"
+              dangerouslySetInnerHTML={{ __html: item }}
+            />
+          ))}
+        </div>
+        <div
+          className={classNames("sell-button sell-button--first", {
+            "sell-button--first-active":
+              isActiveModal.active && isActiveModal.type === "buy",
+          })}
+          onClick={() => handleClick("buy")}
+        >
+          Заказать тестовый пролив
+        </div>
+      </div>
+      <div className="buy-sell__table buy-sell__table--sell">
+        <h1 className="fz--70 fz--mobile-54 uppercase title">{sell.title}</h1>
+
+        <div className="list">
+          {sell.list.map((item, index) => (
+            <div
+              key={index}
+              className="item"
+              dangerouslySetInnerHTML={{ __html: item }}
+            />
+          ))}
+        </div>
+        <div
+          className={classNames("sell-button sell-button--second", {
+            "sell-button--second-active":
+              isActiveModal.active && isActiveModal.type === "sell",
+          })}
+          onClick={() => handleClick("sell")}
+        >
+          начать зарабатывать
+        </div>
+      </div>
+      <div className="buttons-wrapper">
+        <div
+          className={classNames("sell-button sell-button--first", {
+            "sell-button--first-active":
+              isActiveModal.active && isActiveModal.type === "buy",
+          })}
+          onClick={() => handleClick("buy")}
+        >
+          Заказать тестовый пролив
+        </div>
+        <div
+          className={classNames("sell-button sell-button--second", {
+            "sell-button--second-active":
+              isActiveModal.active && isActiveModal.type === "sell",
+          })}
+          onClick={() => handleClick("sell")}
+        >
+          начать зарабатывать
+        </div>
+      </div>
+
+      <AnimatePresence mode="wait">
+        {isActiveModal.active && isActiveModal.type === "buy" && (
+          <motion.section
+            className="active-section active-section--buy"
+            {...anim(animModal.wrapperPresence)}
+          >
+            <div className="active-section__title">
+              {buy.section.title.map((item, index) => (
+                <h1 key={index} className="fz--mobile-24">
+                  {item}
+                </h1>
+              ))}
+            </div>
+
+            <div className="active-section__list">
+              {buy.section.list.map((item, index) => (
+                <div key={index} className="item">
+                  <Image
+                    src={item.image}
+                    alt=""
+                    width={44}
+                    height={44}
+                    className="item__image"
+                  />
+                  <div className="text">
+                    <p className="fz--18 fz--mobile-16 shadow">[{index + 1}]</p>
+                    <p className="fz--18 fz--mobile-14 ">{item.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="active-section__cta">
+              <Image
+                src="/images/buysell/tg.png"
+                alt=""
+                width={300}
+                height={300}
+                className="cta__image"
+              />
+              <p className="fz--18 fz--mobile-14 shadow">{buy.cta.title}</p>
+              <div className="cta__link-wrapper">
+                <HoverAnim modalType="contact">{buy.cta.button.title}</HoverAnim>
+                <Image
+                  src="/images/arrow.svg"
+                  alt=""
+                  width={13}
+                  height={15}
+                  className="arrow"
+                />
+              </div>
+            </div>
+
+            <motion.div className="active-section__background">
+              <Image src="/images/buysell/buysell-bg.png" alt="" fill />
+            </motion.div>
+            <motion.div
+              className="active-section__doll"
+              {...anim(animModal.doll)}
+              custom={isActiveModal.type === "buy" ? 0 : 1}
+            >
+              <Image src="/images/hero/hero.png" alt="" fill />
+            </motion.div>
+
+            <div className="buttons-wrapper">
+              <div
+                className={classNames("sell-button sell-button--first", {
+                  "sell-button--first-active":
+                    isActiveModal.active && isActiveModal.type === "buy",
+                })}
+                onClick={() => handleClick("buy")}
+              >
+                Заказать тестовый пролив
+              </div>
+              <div
+                className={classNames("sell-button sell-button--second", {
+                  "sell-button--second-active":
+                    isActiveModal.active && isActiveModal.type === "sell",
+                })}
+                onClick={() => handleClick("sell")}
+              >
+                начать зарабатывать
+              </div>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {isActiveModal.active && isActiveModal.type === "sell" && (
+          <motion.section
+            className="active-section active-section--sell"
+            {...anim(animModal.wrapperPresence)}
+          >
+            <div className="active-section__title">
+              {sell.section.title.map((item, index) => (
+                <h1 key={index} className="fz--mobile-24">
+                  {item}
+                </h1>
+              ))}
+            </div>
+
+            <div className="active-section__list">
+              {sell.section.list.map((item, index) => (
+                <div key={index} className="item">
+                  <Image
+                    src={item.image}
+                    alt=""
+                    width={44}
+                    height={44}
+                    className="item__image"
+                  />
+                  <div className="text">
+                    <p className="fz--18 fz--mobile-16 shadow">[{index + 1}]</p>
+                    <p className="fz--18 fz--mobile-14 ">{item.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="active-section__cta">
+              <Image
+                src="/images/buysell/tgsell.png"
+                alt=""
+                width={300}
+                height={300}
+                className="cta__image"
+              />
+              <p className="fz--18 fz--mobile-14 shadow">{sell.cta.title}</p>
+              <div className="cta__link-wrapper">
+                <HoverAnim modalType="contact">{sell.cta.button.title}</HoverAnim>
+                <Image
+                  src="/images/arrow.svg"
+                  alt=""
+                  width={13}
+                  height={15}
+                  className="arrow"
+                />
+              </div>
+            </div>
+
+            <motion.div className="active-section__background">
+              <Image src="/images/buysell/buysell-bg.png" alt="" fill />
+            </motion.div>
+            <motion.div
+              className="active-section__doll"
+              {...anim(animModal.doll)}
+              custom={isActiveModal.type === "buy" ? 0 : 1}
+            >
+              <Image src="/images/hero/hero.png" alt="" fill />
+            </motion.div>
+
+            <div className="buttons-wrapper">
+              <div
+                className={classNames("sell-button sell-button--first", {
+                  "sell-button--first-active":
+                    isActiveModal.active && isActiveModal.type === "buy",
+                })}
+                onClick={() => handleClick("buy")}
+              >
+                Заказать тестовый пролив
+              </div>
+              <div
+                className={classNames("sell-button sell-button--second", {
+                  "sell-button--second-active":
+                    isActiveModal.active && isActiveModal.type === "sell",
+                })}
+                onClick={() => handleClick("sell")}
+              >
+                начать зарабатывать
+              </div>
+            </div>
+
+          </motion.section>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
