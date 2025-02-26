@@ -46,7 +46,7 @@ export default function BuySell({
           "buy-sell__background--active": background,
         })}
       >
-        <Image src="/images/buysell-bg.png" alt="" fill />
+        <Image src="/images/buysell/buysell-bg.webp" alt="" fill />
       </div>
 
       <div className="buy-sell__mobile-background buy-sell__mobile-background--top">
