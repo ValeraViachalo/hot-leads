@@ -28,7 +28,7 @@ export default function BuySell({
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isActiveModal.active) {
+      if (isActiveModal.active && (isActiveModal.type === "buy" || isActiveModal.type === "sell")) {
         setisActiveModal({ active: false, type: isActiveModal.type });
       }
     };

@@ -2,6 +2,10 @@
     width: VW(400);
     height: VW(600);
     position: relative;
+    // overflow: hidden;
+    // clip-path: polygon(44% 0, 50.8% 5.1%, 100% 5.3%, 100% 100%, 70% 110%, 35% 100%, 0 100%, 0 0);
+    // backdrop-filter: blur(1vw);
+    // border-radius: VW(14);
 
     @include forMobile {
       width: VW(300, $mobile);

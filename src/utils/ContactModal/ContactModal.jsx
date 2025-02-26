@@ -11,6 +11,9 @@ import fullData from "./ContactContent.json";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { anim, animModal } from "@/lib/helpers/anim";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { sendContactMessage } from "@/lib/helpers/contact";
 
 export default function ContactModal({ isActive, setIsActive }) {
   const [contactType, setContactType] = useState("telegram");
@@ -38,11 +41,19 @@ export default function ContactModal({ isActive, setIsActive }) {
     });
   };
 
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+  
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     console.log({ ...values, contactType });
     setSubmitting(false);
     setSubmitted(true);
     resetForm();
+
+    try {
+      await sendContactMessage({ ...values, contactType });
+    } catch (error) {
+      console.error('Error sending message.', error);
+    }
   };
 
   return (

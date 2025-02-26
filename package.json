@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
+    "axios": "^1.8.1",
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
     "framer-motion": "^12.0.0",
@@ -18,6 +19,7 @@
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-toastify": "^11.0.5",
     "sass": "^1.82.0",
     "yup": "^1.6.1"
   }
