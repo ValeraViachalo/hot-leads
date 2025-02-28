@@ -27,6 +27,13 @@
       z-index: 10;
     }
 
+    .title {
+      @include forMobile {
+        clip-path: none !important;
+        transform: none !important;
+      }
+    }
+
     &--buy {
       .title {
         color: $green-100;
@@ -70,6 +77,8 @@
           padding: VW(10, $mobile);
           width: VW(314, $mobile);
           height: 90%;
+          opacity: 1 !important;
+          transform: none !important;
         }
       }
     }

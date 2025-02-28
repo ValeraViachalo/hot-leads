@@ -1,4 +1,5 @@
-import { wrap } from "framer-motion";
+import { delay } from "framer-motion";
+import { ease } from "./ease";
 
 export const anim = (variants) => {
   return {
@@ -8,6 +9,205 @@ export const anim = (variants) => {
     variants,
   };
 };
+
+export const presenceAnim = (variants, state) => {
+  return {
+    initial: "initial",
+    animate: state ? "animate" : "initial",
+    variants,
+  };
+};
+
+export const headerAnim = {
+  initial: {
+    opacity: 0,
+    y: "-20%",
+  },
+  animate: {
+    opacity: 1,
+    y: "0%",
+    transition: {
+      duration: 1,
+      ease: [0.88, 0.05, 0.1, 0.97],
+    },
+  },
+}
+
+export const heroAnim = {
+  doll: {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 1,
+        delay: 0.2,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    },
+  },
+  background: {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 1,
+        delay: 0.5,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    },
+  },
+  title: {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    },
+  },
+  cards: {
+    initial: {
+      opacity: 0,
+      y: "20%",
+    },
+    animate: (i) => ({
+      opacity: 1,
+      y: "0%",
+      transition: {
+        duration: 1,
+        delay: i * 0.2,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    }),
+  },
+}
+
+export const buySellAnim = {
+  title: {
+    initial: {
+      clipPath: "inset(0% -20% 100% -20%)",
+      y: "70%",
+    },
+    animate: {
+      clipPath: "inset(-20% -20% -20% -20%)",
+      y: "0%",
+      transition: {
+        duration: 1,
+        ease: ease.outExpo,
+      },
+      transitionEnd: {
+        clipPath: "none",
+        y: "auto",
+      }
+    },
+    exit: {
+      clipPath: "inset(-20% -20% -20% -20%)",
+      y: "0%",
+    },
+  },
+  cards: {
+    initial: {
+      opacity: 0,
+      y: "20%",
+    },
+    animate: (i) => ({
+      opacity: 1,
+      y: "0%",
+      transition: {
+        duration: 1,
+        delay: i * 0.2,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    }),
+  }
+}
+
+export const footerAnim = {
+  doll: {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    },
+  },
+  links: {
+    initial: {
+      opacity: 0,
+      y: "20%",
+    },
+    animate: (i) => ({
+      opacity: 1,
+      y: "0%",
+      transition: {
+        duration: 1,
+        delay: i * 0.2,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    }),
+  },
+  title: {
+    initial: {
+      clipPath: "inset(0% -20% 100% -20%)",
+      y: "70%",
+    },
+    animate: (id) => ({
+      clipPath: "inset(-20% -20% -20% -20%)",
+      y: "0%",
+      transition: {
+        duration: 1,
+        ease: ease.outExpo,
+        delay: id * 0.1,
+      },
+      transitionEnd: {
+        clipPath: "none",
+        y: "auto",
+      }
+    }),
+    exit: {
+      clipPath: "inset(0% 0% 100% 0%)",
+      y: "100%",
+    },
+  },
+  borders: {
+    initial: (pos) => ({
+      opacity: 0,
+      x: pos === "left" ? "100%" : "-100%",
+    }),
+    animate: {
+      opacity: 1,
+      x: "0%",
+      transition: {
+        duration: 1,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    },
+  },
+  opacity: {
+    initial: {
+      opacity: 0,
+    },
+    animate: (delay=0) => ({
+      opacity: 1,
+      transition: {
+        duration: 1,
+        delay,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    }),
+  },
+}
 
 export const ModalAnim = {
   wrapperPresence: {

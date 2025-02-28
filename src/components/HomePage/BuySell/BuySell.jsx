@@ -4,12 +4,12 @@ import { DataContext } from "@/lib/providers/DataProvider/context";
 import Image from "next/image";
 import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { anim, animModal } from "@/lib/helpers/anim";
+import { anim, animModal, buySellAnim, presenceAnim } from "@/lib/helpers/anim";
 import Link from "next/link";
 import { HoverAnim } from "@/utils/HoverAnim/HoverAnim";
 
 export default function BuySell({
-  background,
+  animPlay,
   isActiveModal,
   setisActiveModal,
 }) {
@@ -43,7 +43,7 @@ export default function BuySell({
     <section className="buy-sell">
       <div
         className={classNames("buy-sell__background", {
-          "buy-sell__background--active": background,
+          "buy-sell__background--active": animPlay,
         })}
       >
         <Image src="/images/buysell/buysell-bg.webp" alt="" fill />
@@ -56,13 +56,15 @@ export default function BuySell({
         <Image src="/images/buysell/mobilebg2.png" alt="" fill />
       </div>
       <div className="buy-sell__table buy-sell__table--buy">
-        <h1 className="fz--70 fz--mobile-54 uppercase title">{buy.title}</h1>
+        <motion.h1 {...presenceAnim(buySellAnim.title, animPlay)} className="fz--70 fz--mobile-54 uppercase title">{buy.title}</motion.h1>
         <div className="list">
           {buy.list.map((item, index) => (
-            <div
+            <motion.div
               key={index}
               className="item"
               dangerouslySetInnerHTML={{ __html: item }}
+              {...presenceAnim(buySellAnim.cards, animPlay)}
+              custom={index}
             />
           ))}
         </div>
@@ -77,14 +79,16 @@ export default function BuySell({
         </div>
       </div>
       <div className="buy-sell__table buy-sell__table--sell">
-        <h1 className="fz--70 fz--mobile-54 uppercase title">{sell.title}</h1>
+        <motion.h1 {...presenceAnim(buySellAnim.title, animPlay)} className="fz--70 fz--mobile-54 uppercase title">{sell.title}</motion.h1>
 
         <div className="list">
           {sell.list.map((item, index) => (
-            <div
+            <motion.div
               key={index}
               className="item"
               dangerouslySetInnerHTML={{ __html: item }}
+              {...presenceAnim(buySellAnim.cards, animPlay)}
+              custom={index}
             />
           ))}
         </div>

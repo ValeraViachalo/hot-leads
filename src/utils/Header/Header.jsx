@@ -10,10 +10,11 @@ import { getFetchData } from "@/lib/helpers/DataFetch";
 import { useLanguageContent } from "@/lib/helpers/useLanguageContent";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu } from "./Menu/Menu";
 import { ModalContext } from "@/lib/providers/ModalProvider/ModalProvider";
 import useIsDesktop from "@/lib/helpers/useIsDesktop";
+import { anim, headerAnim } from "@/lib/helpers/anim";
 
 export default function Header() {
   const [data, setData] = useState(null);
@@ -40,7 +41,7 @@ export default function Header() {
 
   return (
     data && (
-      <header className="header">
+      <motion.header {...anim(headerAnim)} className="header">
         <Logo className="header__logo" />
 
         <div className={classNames("header__wrapper", { "header__wrapper--active": isActiveModal.active })}>
@@ -117,7 +118,7 @@ export default function Header() {
             </AnimatePresence>
           </div>
         </div>
-      </header>
+      </motion.header>
     )
   );
 }

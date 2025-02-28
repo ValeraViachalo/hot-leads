@@ -245,7 +245,7 @@ const Bg = ({ isBuy }) => {
           </defs>
         </svg>
       )} */}
-      {isBuy ? (
+      {/* {isBuy ? (
         <Image
           src="/images/results/green-bg.svg"
           alt=""
@@ -257,7 +257,7 @@ const Bg = ({ isBuy }) => {
           alt=""
           fill
         />
-      )}
+      )} */}
     </div>
   );
 };

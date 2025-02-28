@@ -6,6 +6,7 @@ import "./Hero.scss";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/utils/Button/Button";
+import { anim, heroAnim, heroAnin } from "@/lib/helpers/anim";
 
 export default function Hero() {
   const { data } = useContext(DataContext);
@@ -13,8 +14,7 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <div className="flames">
-
+      <motion.div {...anim(heroAnim.background)} className="flames">
         <Image
           src="/images/hero/flame-1.png"
           alt=""
@@ -29,8 +29,8 @@ export default function Hero() {
           width={753}
           height={380}
         />
-      </div>
-      <div className="title-wrapper">
+      </motion.div>
+      <motion.div {...anim(heroAnim.title)} className="title-wrapper">
         <Image
           src="/images/hero/title.svg"
           alt="Hot-leads"
@@ -46,13 +46,15 @@ export default function Hero() {
           data-only-mobile
         />
         <div className="title__bottom">
-          <Button modalType="contact">{hero.title.button}</Button>
-          <p className="description fz--mobile-14">{hero.title.description}</p>
+          <motion.div className="button-wrapper" {...anim(heroAnim.cards)} custom={0}>
+            <Button modalType="contact">{hero.title.button}</Button>
+          </motion.div>
+          <motion.p {...anim(heroAnim.cards)} custom={0} className="description fz--mobile-14">{hero.title.description}</motion.p>
         </div>
-      </div>
+      </motion.div>
       <div className="cards">
         {hero.list.map((card, index) => (
-          <motion.div key={index} className="card uppercase">
+          <motion.div {...anim(heroAnim.cards)} custom={index} key={`hero-card-${index}`} className="card uppercase">
             <div className="card__text">
               <p className="fz--16 fz--mobile-14">{card.top}</p>
               <p className="fz--20 fz--mobile-18 col-red">{card.title}</p>

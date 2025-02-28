@@ -13,12 +13,14 @@ import "./HeroAnim.scss";
 import BuySell from "../BuySell/BuySell";
 import useIsDesktop from "@/lib/helpers/useIsDesktop";
 import { ModalContext } from "@/lib/providers/ModalProvider/ModalProvider";
+import { anim, heroAnim } from "@/lib/helpers/anim";
 
 export default function HeroAnim() {
   const { isActiveModal, setisActiveModal } = useContext(ModalContext);
   const isDesktop = useIsDesktop();
   const heroAnimRef = useRef(null);
-  const [background, setBackground] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false)
+  const [animPlay, setAnimPlay] = useState(false);
   
 
   const { scrollYProgress } = useScroll({
@@ -36,7 +38,11 @@ export default function HeroAnim() {
   const y = useTransform(springScroll, [0, 1], ["-100%", "20%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setBackground(latest === 1);
+    // if (latest === 1 && !isAnimated) {
+    //   setAnimPlay(true);
+    //   setIsAnimated(true);
+    // }
+    setAnimPlay(latest === 1);
     if (latest !== 1 && isDesktop) {
       setisActiveModal({ active: false, type: "" });
     }
@@ -48,13 +54,13 @@ export default function HeroAnim() {
         <motion.div
           className="hero-anim"
           style={{ scale, y }}
-          
+          {...anim(heroAnim.doll)}
         >
           <Image src="/images/hero/hero.png" alt="" fill />
         </motion.div>
         <Hero />
         <BuySell
-          background={background}
+          animPlay={animPlay}
           isActiveModal={isActiveModal}
           setisActiveModal={setisActiveModal}
         />
