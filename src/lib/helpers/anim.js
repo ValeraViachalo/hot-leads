@@ -31,7 +31,7 @@ export const headerAnim = {
       ease: [0.88, 0.05, 0.1, 0.97],
     },
   },
-}
+};
 
 export const heroAnim = {
   doll: {
@@ -87,7 +87,7 @@ export const heroAnim = {
       },
     }),
   },
-}
+};
 
 export const buySellAnim = {
   title: {
@@ -105,7 +105,7 @@ export const buySellAnim = {
       transitionEnd: {
         clipPath: "none",
         y: "auto",
-      }
+      },
     },
     exit: {
       clipPath: "inset(-20% -20% -20% -20%)",
@@ -126,8 +126,8 @@ export const buySellAnim = {
         ease: [0.88, 0.05, 0.1, 0.97],
       },
     }),
-  }
-}
+  },
+};
 
 export const footerAnim = {
   doll: {
@@ -173,7 +173,7 @@ export const footerAnim = {
       transitionEnd: {
         clipPath: "none",
         y: "auto",
-      }
+      },
     }),
     exit: {
       clipPath: "inset(0% 0% 100% 0%)",
@@ -198,7 +198,7 @@ export const footerAnim = {
     initial: {
       opacity: 0,
     },
-    animate: (delay=0) => ({
+    animate: (delay = 0) => ({
       opacity: 1,
       transition: {
         duration: 1,
@@ -207,7 +207,7 @@ export const footerAnim = {
       },
     }),
   },
-}
+};
 
 export const ModalAnim = {
   wrapperPresence: {
@@ -247,12 +247,12 @@ export const ModalAnim = {
       },
       transitionEnd: {
         clipPath: "none",
-      }
+      },
     }),
     exit: {
       y: "0%",
       clipPath: "none",
-    }
+    },
   },
   bgPresence: {
     initial: {
@@ -313,5 +313,67 @@ export const animModal = {
         ease: [0.88, 0.05, 0.1, 0.97],
       },
     }),
+  },
+  title: {
+    initial: {
+      y: "80%",
+      clipPath: "inset(0% -10% 100%)",
+    },
+    animate: (i) => ({
+      y: "0%",
+      clipPath: "inset(0% -10% 0%)",
+      transition: {
+        duration: 1,
+        delay: i * 0.2,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+      transitionEnd: {
+        clipPath: "none",
+      },
+    }),
+    exit: {
+      y: "0%",
+      clipPath: "none",
+    },
+  },
+  card: {
+    initial: (direction) => ({
+      opacity: 0,
+      x: !direction ? "20%" : "-20%",
+    }),
+    animate: {
+      opacity: 1,
+      x: "0%",
+      transition: {
+        duration: 1,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    },
+    exit: (direction) => ({
+      opacity: 0,
+      x: !direction ? "20%" : "-20%",
+      transition: {
+        duration: 1,
+        ease: [0.88, 0.05, 0.1, 0.97],
+      },
+    }),
+  },
+  listItems: {
+    initial: {
+      opacity: 0,
+    },
+    animate: (i) => ({
+      opacity: 1,
+      transition: {
+        duration: 1,
+        delay: (i * 0.2) + 0.5,
+      },
+    }),
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 1,
+      },
+    }
   }
-}
+};

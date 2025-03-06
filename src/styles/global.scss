@@ -75,3 +75,21 @@
 .col-red {
   color: $r-70;
 }
+
+.modal-background {
+  position: fixed;
+  inset: 0;
+  background-color: $c-black;
+  z-index: 10;
+  opacity: 0;
+  animation: presence 0.5s ease-in-out forwards;  
+
+  @keyframes presence {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

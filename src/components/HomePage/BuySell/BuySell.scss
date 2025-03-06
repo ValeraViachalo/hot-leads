@@ -1,11 +1,14 @@
 .buy-sell {
   height: 100vh;
-  width: auto;
   position: relative;
   display: flex;
   justify-content: space-between;
+  
+  // width: auto;
+  // padding: VW(53) VW(100) 0;
 
-  padding: VW(53) VW(100) 0;
+  width: calc(100vw - VW(200));
+  margin: 0 auto;
 
   @include forMobile {
     flex-direction: column;
@@ -13,6 +16,7 @@
     gap: VW(50, $mobile);
     height: auto;
     padding-bottom: VW(100);
+    width: auto;
   }
 
   &__table {
@@ -22,9 +26,10 @@
     width: VW(330);
 
     @include forMobile {
-      width: 100%;
+      width: auto;
       position: relative;
       z-index: 10;
+      padding: 0 VW(20, $mobile);
     }
 
     .title {
@@ -75,7 +80,7 @@
 
         @include forMobile {
           padding: VW(10, $mobile);
-          width: VW(314, $mobile);
+          // width: VW(314, $mobile);
           height: 90%;
           opacity: 1 !important;
           transform: none !important;
@@ -142,8 +147,10 @@
     position: absolute;
     bottom: 0;
     z-index: 4;
-    left: VW(100);
-    right: VW(100);
+    // left: VW(100);
+    // right: VW(100);
+    left: 0;
+    right: 0;
 
     display: flex;
 
@@ -427,6 +434,8 @@
 
     .buttons-wrapper {
       bottom: VW(30);
+      left: VW(100);
+      right: VW(100);
     }
   }
 }
