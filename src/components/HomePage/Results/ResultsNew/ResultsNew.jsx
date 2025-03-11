@@ -103,8 +103,11 @@ const CustomSwiper = ({ customStyles = {} }) => {
     breakpoints: {
       //aspect ratio breakpoints
 
-      "@0.00": {
+      "@0": {
         slidesPerView: 3,
+      },
+      "@0.67": {
+        slidesPerView: "auto",
       },
     },
 
