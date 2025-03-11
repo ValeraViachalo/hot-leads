@@ -346,8 +346,8 @@ const ActiveSection = ({ data, isActiveModal, setisActiveModal, type, handleClic
             <Image
               src={item.image}
               alt=""
-              width={44}
-              height={44}
+              width={144}
+              height={144}
               className="item__image"
             />
             <div className="text">
