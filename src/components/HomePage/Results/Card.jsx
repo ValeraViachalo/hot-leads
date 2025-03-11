@@ -5,7 +5,7 @@ import React from "react";
 import "./Card.scss";
 
 export const Card = ({ data }) => {
-  const top = data.top;
+  const top = data?.top;
   return (
     <div className={classNames("result-card", {
       "result-card--buy": data.type === "buy",
