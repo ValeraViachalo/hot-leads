@@ -43,8 +43,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="html">
       <body className={`${hovesPro.variable} body`}>
-      
-            h1ello
+        <ScrollProvider scrollBar></ScrollProvider>
+        <LocaleProvider>
+          <ModalProvider>
+            {/* <Header /> */}
+            {children}
+            {/* <Footer /> */}
+          </ModalProvider>
+        </LocaleProvider>
       </body>
     </html>
   );
