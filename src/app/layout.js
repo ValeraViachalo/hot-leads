@@ -47,8 +47,9 @@ export default function RootLayout({ children }) {
         <LocaleProvider>
           <ModalProvider>
             {/* <Header /> */}
-            {children}
+            {/* {children} */}
             {/* <Footer /> */}
+            h1ello
           </ModalProvider>
         </LocaleProvider>
       </body>
