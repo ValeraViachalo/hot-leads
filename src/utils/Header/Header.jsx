@@ -42,7 +42,9 @@ export default function Header() {
   return (
     data && (
       <motion.header {...anim(headerAnim)} className="header">
-        <Logo className="header__logo" />
+        <Link href="/">
+          <Logo className="header__logo" />
+        </Link>
 
         <div className={classNames("header__wrapper", { "header__wrapper--active": isActiveModal.active })}>
           {isActiveModal.active && !isDesktop && (

@@ -46,9 +46,9 @@ export default function RootLayout({ children }) {
         <ScrollProvider scrollBar></ScrollProvider>
         <LocaleProvider>
           <ModalProvider>
-            <Header />
+            {/* <Header /> */}
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </ModalProvider>
         </LocaleProvider>
       </body>

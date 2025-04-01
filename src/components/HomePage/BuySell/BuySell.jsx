@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext, useState, useEffect } from "react";
 import "./BuySell.scss";
 import { DataContext } from "@/lib/providers/DataProvider/context";
@@ -7,12 +8,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import { anim, animModal, buySellAnim, presenceAnim } from "@/lib/helpers/anim";
 import Link from "next/link";
 import { HoverAnim } from "@/utils/HoverAnim/HoverAnim";
+import { ModalContext } from "@/lib/providers/ModalProvider/ModalProvider";
 
-export default function BuySell({ animPlay, isActiveModal, setisActiveModal }) {
+export default function BuySell() {
+  const { isActiveModal, setisActiveModal } = useContext(ModalContext);
+  
   const { data: fullData } = useContext(DataContext);
   const { buysell: data } = fullData;
   const { buy } = data;
   const { sell } = data;
+
+  const animPlay = true;
 
   const handleClick = (type) => {
     if (isActiveModal.active && isActiveModal.type === type) {
@@ -22,27 +28,10 @@ export default function BuySell({ animPlay, isActiveModal, setisActiveModal }) {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        isActiveModal.active &&
-        (isActiveModal.type === "buy" || isActiveModal.type === "sell")
-      ) {
-        setisActiveModal({ active: false, type: isActiveModal.type });
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isActiveModal, setisActiveModal]);
-
   return (
     <section className="buy-sell">
       <div
-        className={classNames("buy-sell__background", {
-          "buy-sell__background--active": animPlay,
+        className={classNames("buy-sell__background buy-sell__background--active", {
         })}
       >
         <Image src="/images/buysell/buysell-bg.webp" alt="" fill />

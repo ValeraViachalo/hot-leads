@@ -1,6 +1,7 @@
 .hero {
   height: 100vh;
   position: relative;
+  overflow: hidden;
 
   @include forMobile {
     height: auto;
@@ -19,6 +20,39 @@
       background: linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
     }
 
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    height: VW(300);
+    background: linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  .hero-anim {
+    position: absolute;
+    inset: 0;
+    height: 120vh;
+    z-index: -2;
+
+    @include forMobile {
+      margin-bottom: 0;
+      position: absolute;
+      top: 1%;
+      transform: translate(-30%, -10%) !important;
+  
+      width: VW(1019, $mobile);
+      height: 100lvh;
+      aspect-ratio: 9/16;
+  
+      img {
+        object-position: top;
+      }
+    }
   }
 
   .title {
@@ -79,21 +113,11 @@
 
   .flames {
     position: absolute;
-    z-index: -2;
+    z-index: -3;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
 
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-      height: VW(300);
-      background: linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
-    }
 
     .hero__flame {
       &-1 {

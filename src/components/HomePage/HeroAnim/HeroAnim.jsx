@@ -16,7 +16,6 @@ import { ModalContext } from "@/lib/providers/ModalProvider/ModalProvider";
 import { anim, heroAnim } from "@/lib/helpers/anim";
 
 export default function HeroAnim() {
-  const { isActiveModal, setisActiveModal } = useContext(ModalContext);
   const isDesktop = useIsDesktop();
   const heroAnimRef = useRef(null);
   const [isAnimated, setIsAnimated] = useState(false)
@@ -51,13 +50,7 @@ export default function HeroAnim() {
   return (
     <>
       <div className="hero-anim__wrapper" ref={heroAnimRef}>
-        <motion.div
-          className="hero-anim"
-          style={{ scale, y }}
-          {...anim(heroAnim.doll)}
-        >
-          <Image src="/images/hero/hero.png" alt="" fill />
-        </motion.div>
+    
         <Hero />
         <BuySell
           animPlay={animPlay}

@@ -61,9 +61,6 @@ export const Button = ({
   );
 };
 
-              // "mainTitle": "<span class=\"white\">Капа<span> для Баингов <span class=\"white\">по</span> натив <span class=\"white\"> Испании </span>",
-
-
 export const SecondaryButton = ({
   to,
   children,

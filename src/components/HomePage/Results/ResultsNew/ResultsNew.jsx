@@ -36,13 +36,13 @@ const CustomSwiper = ({ customStyles = {} }) => {
     direction: "horizontal",
     slidesPerView: "auto", // Changed to auto for better control
     centeredSlides: true,
-    initialSlide: 0,
+    initialSlide: 2,
     autoHeight: false,
     grabCursor: true,
     slideToClickedSlide: true,
     loop: true,
     loopAddBlankSlides: true,
-    loopAdditionalSlides: 10,
+    loopAdditionalSlides: 6,
 
     // Effect settings
     effect: "coverflow", // Change to coverflow effect
@@ -116,7 +116,7 @@ const CustomSwiper = ({ customStyles = {} }) => {
 
   return (
     <section className="results">
-            <span className="results__title uppercase">{results.title}</span>
+            <span className="results__title uppercase">{results?.title}</span>
 
       <div className="swiper-container">
         <Swiper {...swiperParams}>

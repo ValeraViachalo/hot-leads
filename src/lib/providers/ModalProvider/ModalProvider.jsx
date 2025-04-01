@@ -18,9 +18,6 @@ export const ModalProvider = ({ children }) => {
         {isActiveModal.active && isActiveModal.type === "contact" && (  
           <ContactModal setIsActive={setisActiveModal} isActive={isActiveModal} />
         )}
-        {isActiveModal.active && (isActiveModal.type === "buy" || isActiveModal.type === "sell") && (
-          <div className="modal-background"></div>
-        )}
       </AnimatePresence>
       {children}
     </ModalContext.Provider>

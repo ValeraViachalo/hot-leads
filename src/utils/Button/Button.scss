@@ -79,6 +79,25 @@
     color: $r-70;
   }
 
+  &--green {
+    background: #00CF3C30 !important;
+    color: $c-white !important;
+
+    @include hover {
+      color: $green-100 !important;
+    }
+
+    .arrow {
+      stroke: $c-white !important;
+      transition: stroke 0.3s $ExpoIn;
+
+      &__wrapper {
+        background-color: $green-100 !important;
+        transition: background-color 0.3s $ExpoIn;
+      }
+    }
+  }
+
   &__text {
     position: relative;
     line-height: 92%;
