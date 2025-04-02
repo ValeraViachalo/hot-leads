@@ -1,30 +1,20 @@
-// import HomePage from "@/components/HomePage/HomePage";
-// import { getFetchData } from "@/lib/helpers/DataFetch";
-// import { URL_BUY_PAGE } from "@/lib/helpers/DataUrls";
-// import { generatePagesMetadata } from "@/lib/helpers/generatePagesMetadata";
-// import { useLanguageContent } from "@/lib/helpers/useLanguageContent";
-// import { DataProvider } from "@/lib/providers/DataProvider/DataProvider";
+import HomePage from "@/components/HomePage/HomePage";
+import { getFetchData } from "@/lib/helpers/DataFetch";
+import { URL_BUY_PAGE } from "@/lib/helpers/DataUrls";
+import { generatePagesMetadata } from "@/lib/helpers/generatePagesMetadata";
+import { useLanguageContent } from "@/lib/helpers/useLanguageContent";
+import { DataProvider } from "@/lib/providers/DataProvider/DataProvider";
 
-// export const generateMetadata = async () => generatePagesMetadata(URL_BUY_PAGE);
-
-// export default async function Home() {
-//   const preparedData = await getFetchData(URL_BUY_PAGE);
-//   const data = useLanguageContent(preparedData, "ru");
-  
-//   return (
-//     <DataProvider data={data}>
-//       <HomePage lang="ru" type="buy"/>
-//     </DataProvider>
-//   );
-// }
+export const generateMetadata = async () => generatePagesMetadata(URL_BUY_PAGE);
 
 export default async function Home() {
+  const preparedData = await getFetchData(URL_BUY_PAGE);
+  const data = useLanguageContent(preparedData, "ru");
+  
   return (
-    <div>
-      <h1>Home</h1>
-      <p>Welcome to the home page!</p>
-      <p>This is a placeholder for the actual content.</p>
-    </div>
-  )
+    <DataProvider data={data}>
+      <HomePage lang="ru" type="buy"/>
+    </DataProvider>
+  );
 }
 
