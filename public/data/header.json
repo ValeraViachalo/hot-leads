@@ -2,20 +2,20 @@
   "ru": {
     "navlist": [
       {
-        "name": "главная",
-        "link": "/"
+        "name": "Главная",
+        "link": "#hero"
       },
       {
-        "name": "продукты",
-        "link": "/faq"
+        "name": "О нас",
+        "link": "#aboutService"
       },
       {
-        "name": "результаты",
-        "link": "/about"
+        "name": "Результаты",
+        "link": "#results"
       },
       {
-        "name": "информация",
-        "link": "/about"
+        "name": "Информация",
+        "link": "#info"
       }
     ],
     "bottom": {
@@ -101,19 +101,19 @@
     "navlist": [
       {
         "name": "Головна",
-        "link": "/"
+        "link": "#hero"
       },
       {
-        "name": "Продукти",
-        "link": "/faq"
+        "name": "Про нас",
+        "link": "#aboutService"
       },
       {
         "name": "Результати",
-        "link": "/about"
+        "link": "#results"
       },
       {
         "name": "Інформація",
-        "link": "/about"
+        "link": "#info"
       }
     ],
     "bottom": {
