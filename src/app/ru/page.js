@@ -11,7 +11,7 @@ export default async function Home() {
   const preparedData = await getFetchData(URL_HOME);
   const data = useLanguageContent(preparedData, "ru");
 
-  return (
+  return data && (
     <LinkPage data={data.linkSection} lang="ru"/>
   );
 }

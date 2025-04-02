@@ -12,7 +12,7 @@ export default async function Home() {
   const preparedData = await getFetchData(URL_SELL_PAGE);
   const data = useLanguageContent(preparedData, "ru");
 
-  return (
+  return data && (
     <DataProvider data={data}>
       <HomePage lang="ru" type="sell" />
     </DataProvider>

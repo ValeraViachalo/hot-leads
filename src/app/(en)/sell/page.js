@@ -11,7 +11,7 @@ export default async function Home() {
   const preparedData = await getFetchData(URL_SELL_PAGE);
   const data = useLanguageContent(preparedData, "en");
   
-  return (
+  return data && (
     <DataProvider data={data}>
       <HomePage lang="" type="sell"/>
     </DataProvider>
