@@ -9,11 +9,11 @@ export const generateMetadata = async () => generatePagesMetadata(URL_SELL_PAGE)
 
 export default async function Home() {
   const preparedData = await getFetchData(URL_SELL_PAGE);
-  const data = useLanguageContent(preparedData, "en");
+  const data = useLanguageContent(preparedData, "ua");
   
   return (
     <DataProvider data={data}>
-      <HomePage lang="" type="sell"/>
+      <HomePage lang="ua" type="sell"/>
     </DataProvider>
   );
 }

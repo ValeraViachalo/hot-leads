@@ -1,11 +1,11 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./AboutService.scss";
 import { DataContext } from "@/lib/providers/DataProvider/context";
 import Image from "next/image";
 import classNames from "classnames";
-import { motion } from "framer-motion";
-import { anim, buySellAnim } from "@/lib/helpers/anim";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { aboutAnim, anim, buySellAnim, presenceAnim } from "@/lib/helpers/anim";
 import { ModalContext } from "@/lib/providers/ModalProvider/ModalProvider";
 import { Button } from "@/utils/Button/Button";
 
@@ -17,20 +17,28 @@ export default function AboutService({ type = "buy" }) {
   const {aboutService: data} = fullData;
   const isBuy = type === "buy";
 
-  const handleClick = (type) => {
-    if (isActiveModal.active && isActiveModal.type === type) {
-      return setisActiveModal({ active: false, type });
-    } else {
-      return setisActiveModal({ active: true, type });
-    }
-  };
+  const [isAnimated, setIsAnimated] = useState(false);
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["10% 100%", "20% 100%"],
+    layoutEffect: false,
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setIsAnimated(latest === 1);
+  });
 
   return (
-    <section className={`service-section-wrapper service-section--${type}`}>
+    <motion.section {...presenceAnim(aboutAnim, isAnimated)} className={`service-section-wrapper service-section--${type}`} ref={sectionRef} id="aboutService">
       <div className={`service-section`}>
-        <div className="service-section__doll">
+        <motion.div className="service-section__doll"
+        {...presenceAnim(aboutAnim, isAnimated)}
+        custom={1}
+        >
           <Image src={`/images/${type}Section/doll.webp`} alt="" fill />
-        </div>
+        </motion.div>
         <div className={classNames("top-titles uppercase", { "top-titles--right": !isBuy })}>
           <span className={`fz--180 fz--mobile-60 ${isBuy ? "green" : "red"}`}>{type}</span>
           <span className="fz--180 fz--mobile-60">{type}</span>
@@ -42,8 +50,8 @@ export default function AboutService({ type = "buy" }) {
           {data.list.map((item, index) => (
             <motion.div
               key={`aboutService-list-${index}`}
-              {...anim(buySellAnim.list)}
-              custom={index}
+              {...presenceAnim(aboutAnim, isAnimated)}
+              custom={index + 2}
               className={classNames("item", {
                 "item--long": item?.big,
               })}
@@ -55,11 +63,11 @@ export default function AboutService({ type = "buy" }) {
               />
             </motion.div>
           ))}
-          <Button classes={`list-button ${isBuy ? "button--green" : ""}`}>
+          <Button classes={`list-button ${isBuy ? "button--green" : ""}`} modalType="contact">
             {data.button?.text}
           </Button>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

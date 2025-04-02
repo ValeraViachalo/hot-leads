@@ -13,7 +13,7 @@ export default function Hero() {
   const { hero } = data;
 
   return (
-    <section className="hero">
+    <section className="hero" id="hero">
       <motion.div className="hero-anim" {...anim(heroAnim.doll)}>
         <Image src="/images/hero/hero.png" alt="" fill />
       </motion.div>

@@ -13,7 +13,7 @@ export default async function Home() {
   
   return (
     <DataProvider data={data}>
-      <HomePage type="buy"/>
+      <HomePage lang="" type="buy"/>
     </DataProvider>
   );
 }

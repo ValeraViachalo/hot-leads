@@ -9,9 +9,9 @@ export const generateMetadata = async () => generatePagesMetadata(URL_HOME);
 
 export default async function Home() {
   const preparedData = await getFetchData(URL_HOME);
-  const data = useLanguageContent(preparedData, "en");
+  const data = useLanguageContent(preparedData, "ua");
 
   return (
-    <LinkPage data={data.linkSection} lang="en"/>
+    <LinkPage data={data.linkSection} lang="ua"/>
   );
 }

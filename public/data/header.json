@@ -52,19 +52,19 @@
     "navlist": [
       {
         "name": "Home",
-        "link": "/"
+        "link": "#hero"
       },
       {
-        "name": "Products",
-        "link": "/faq"
+        "name": "About",
+        "link": "#aboutService"
       },
       {
         "name": "Results",
-        "link": "/about"
+        "link": "#results"
       },
       {
         "name": "Information",
-        "link": "/about"
+        "link": "#info"
       }
     ],
     "bottom": {

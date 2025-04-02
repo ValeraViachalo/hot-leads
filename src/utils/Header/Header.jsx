@@ -39,14 +39,37 @@ export default function Header() {
     fetchData();
   }, [path, lang]);
 
+  const getLanguagePath = (targetLang, currentPath) => {
+    // Handle root path special case
+    if (currentPath === "/" || currentPath === "/ua" || currentPath === "/ru") {
+      return targetLang === "en" ? "/" : `/${targetLang}`;
+    }
+
+    // Handle regular paths
+    const pathWithoutLang = currentPath.replace(/^\/(ua|ru)\//, "/");
+
+    if (targetLang === "en") {
+      return pathWithoutLang; // Remove language prefix for English
+    } else {
+      return `/${targetLang}${pathWithoutLang === "/" ? "" : pathWithoutLang}`;
+    }
+  };
+
   return (
     data && (
       <motion.header {...anim(headerAnim)} className="header">
-        <Link href="/">
+        <Link
+          href={lang !== "en" ? `/${lang}` : "/"}
+          className="header__logo-link"
+        >
           <Logo className="header__logo" />
         </Link>
 
-        <div className={classNames("header__wrapper", { "header__wrapper--active": isActiveModal.active })}>
+        <div
+          className={classNames("header__wrapper", {
+            "header__wrapper--active": isActiveModal.active,
+          })}
+        >
           {isActiveModal.active && !isDesktop && (
             <div
               className="header__back-button"
@@ -85,6 +108,7 @@ export default function Header() {
                 key={`header_link_${index}`}
                 className="link"
                 href={currLink.link}
+                data-use-scroll={currLink.link}
               >
                 <span>{currLink.name}</span>
               </Link>
@@ -92,19 +116,26 @@ export default function Header() {
           </ul>
           <div className="lang-swith">
             <Link
-              href="/ru"
+              href={getLanguagePath("ua", path)}
+              className={classNames("link", { "link--active": lang === "ua" })}
+            >
+              ua
+            </Link>
+            <span>/</span>
+            <Link
+              href={getLanguagePath("ru", path)}
               className={classNames("link", { "link--active": lang === "ru" })}
             >
               ru
             </Link>
             <span>/</span>
             <Link
-              href="/"
+              href={getLanguagePath("en", path)}
               className={classNames("link", { "link--active": lang === "en" })}
             >
               en
             </Link>
-          </div>
+          </div>{" "}
           <div className="menu-wrapper">
             <div className="menu__button" onClick={() => setIsMenuActive(true)}>
               <p className="uppercase">Menu</p>

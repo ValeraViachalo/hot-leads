@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Logo } from "../Logo/Logo";
 
 import "./Footer.scss";
@@ -7,13 +7,13 @@ import { useLanguageContent } from "@/lib/helpers/useLanguageContent";
 import { URL_FOOTER } from "@/lib/helpers/DataUrls";
 import { DataProvider } from "@/lib/providers/DataProvider/DataProvider";
 import FooterContent from "./FooterContent";
+import { LocaleContext } from "@/lib/providers/LocaleContext/context";
 
-export default async function Footer() {
+export default async function Footer({lang}) {
   const preparedData = await getFetchData(URL_FOOTER);
-  const data = useLanguageContent(preparedData, "en");
+  const data = useLanguageContent(preparedData, lang);
 
   console.log(data);
-  
 
   return (
       <DataProvider data={data}>

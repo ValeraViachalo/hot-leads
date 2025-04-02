@@ -10,7 +10,8 @@ export const LocaleProvider = ({ children }) => {
 
     useEffect(() => {
         const isRuPath = path.startsWith("/ru");
-        setLang(isRuPath ? "ru" : "en");
+        const isUaPath = path.startsWith("/ua");
+        setLang((isRuPath && "ru") || (isUaPath && "ua") || "en");
     }, [path]);
 
     return (

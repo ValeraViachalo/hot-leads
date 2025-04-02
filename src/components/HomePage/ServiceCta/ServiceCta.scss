@@ -258,7 +258,6 @@
     text-transform: uppercase;
 
     @include forMobile {
-      padding: VW(20, $mobile) 0;
       width: 100%;
       margin-top: VW(24, $mobile);
     }
@@ -274,6 +273,10 @@
       @include hover {
         background: rgba(0, 207, 60);
       }
+
+      @include forMobile {
+        padding: VW(25, $mobile) 0 VW(20, $mobile);
+      }  
 
       &-active {
         background: rgba(0, 207, 60);
@@ -293,6 +296,7 @@
       }
 
       @include forMobile {
+        padding: VW(20, $mobile) 0 VW(25, $mobile);
         bottom: VW(20, $mobile);
       }
 

@@ -1,7 +1,8 @@
 .link-page {
   width: 100vw;
   height: 100vh;
-  position: relative;
+  position: fixed;
+  inset: 0;
   z-index: 1000;
   display: flex;
 
@@ -64,6 +65,10 @@
       bottom: 50vh;
     }  
 
+    &__title {
+      text-align: center;
+    }
+
     &__img {
       position: absolute;
       bottom: 0;
@@ -75,7 +80,11 @@
       @include forMobile {
         height: VW(600, $mobile);
         width: VW(600, $mobile);
-        bottom: -25%;
+        overflow: hidden;
+
+        img {
+          top: VW(180, $mobile) !important;
+        }
       }
     }
   }

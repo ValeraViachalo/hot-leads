@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -25,6 +25,8 @@ import { DataContext } from "@/lib/providers/DataProvider/context";
 import { Card } from "../Card";
 
 import "./ResultsNew.scss";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { aboutAnim, buySellAnim, presenceAnim } from "@/lib/helpers/anim";
 
 const CustomSwiper = ({ customStyles = {} }) => {
   const { data } = useContext(DataContext);
@@ -114,11 +116,24 @@ const CustomSwiper = ({ customStyles = {} }) => {
     ...customStyles,
   };
 
-  return (
-    <section className="results">
-            <span className="results__title uppercase">{results?.title}</span>
+  const [isAnimated, setIsAnimated] = useState(false);
+  const sectionRef = useRef(null);
 
-      <div className="swiper-container">
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["10% 100%", "20% 100%"],
+    layoutEffect: false,
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setIsAnimated(latest === 1);
+  });
+
+  return (
+    <section className="results" ref={sectionRef} id="results">
+      <motion.span {...presenceAnim(aboutAnim, isAnimated)} className="results__title uppercase">{results?.title}</motion.span>
+
+      <motion.div {...presenceAnim(aboutAnim, isAnimated)} custom={1} className="swiper-container">
         <Swiper {...swiperParams}>
           {[...results.list, ...results.list, ...results.list].map(
             (item, index) => (
@@ -134,7 +149,7 @@ const CustomSwiper = ({ customStyles = {} }) => {
             )
           )}
         </Swiper>
-      </div>
+      </motion.div>
     </section>
   );
 };

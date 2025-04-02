@@ -1,11 +1,11 @@
 "use client";
-import { anim, animModal } from "@/lib/helpers/anim";
+import { anim, animModal, presenceAnim } from "@/lib/helpers/anim";
 import { DataContext } from "@/lib/providers/DataProvider/context";
 import { ModalContext } from "@/lib/providers/ModalProvider/ModalProvider";
 import classNames from "classnames";
-import { motion } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 
 import "./ServiceCta.scss";
 
@@ -14,16 +14,31 @@ export default function ServiceCta({ type }) {
   const { data: fullData } = useContext(DataContext);
   const { ctaSection: data } = fullData;
 
+  const [isAnimated, setIsAnimated] = useState(false);
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["10% 100%", "20% 100%"],
+    layoutEffect: false,
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setIsAnimated(latest === 1);
+  });
+
   return (
     <motion.section
       className={`active-section active-section--${type}`}
-      {...anim(animModal.wrapperPresence)}
+      {...presenceAnim(animModal.wrapperPresence, isAnimated)}
+      ref={sectionRef}
+      id="info"
     >
       <div className="active-section__title">
         {data.title.map((item, index) => (
           <motion.h1
             key={index}
-            {...anim(animModal.title)}
+            {...presenceAnim(animModal.title, isAnimated)}
             custom={index}
             className="fz--mobile-24"
           >
@@ -35,7 +50,7 @@ export default function ServiceCta({ type }) {
       <div className="active-section__list">
         {data.list.map((item, index) => (
           <motion.div
-            {...anim(animModal.listItems)}
+            {...presenceAnim(animModal.listItems, isAnimated)}
             custom={index}
             key={index}
             className="item"
@@ -57,7 +72,7 @@ export default function ServiceCta({ type }) {
           className={`sell-button sell-button--${type}`}
           onClick={() => setisActiveModal({ active: true, type: "contact" })}
         >
-          Заказать тестовый пролив
+          {data.button.text}
         </div>
       </div>
 
@@ -66,8 +81,8 @@ export default function ServiceCta({ type }) {
       </motion.div>
       <motion.div
         className="active-section__doll"
-        {...anim(animModal.doll)}
-        custom={isActiveModal.type === "buy" ? 0 : 1}
+        {...presenceAnim(animModal.doll, isAnimated)}
+        custom={type !== "buy" ? 0 : 1}
       >
         <Image src="/images/hero/hero.png" alt="" fill />
       </motion.div>
