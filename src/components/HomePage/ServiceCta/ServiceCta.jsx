@@ -14,18 +14,18 @@ export default function ServiceCta({ type }) {
   const { data: fullData } = useContext(DataContext);
   const { ctaSection: data } = fullData;
 
-  const [isAnimated, setIsAnimated] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(true);
   const sectionRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["10% 100%", "20% 100%"],
-    layoutEffect: false,
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: sectionRef,
+  //   offset: ["10% 100%", "20% 100%"],
+  //   layoutEffect: false,
+  // });
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setIsAnimated(latest === 1);
-  });
+  // useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  //   setIsAnimated(latest === 1);
+  // });
 
   return (
     <motion.section
@@ -77,14 +77,14 @@ export default function ServiceCta({ type }) {
       </div>
 
       <motion.div className="active-section__background">
-        <Image src="/images/buysell/buysell-bg.png" alt="" fill />
+        <Image src="/images/buysell/buysell-bg.png" alt="" fill priority/>
       </motion.div>
       <motion.div
         className="active-section__doll"
         {...presenceAnim(animModal.doll, isAnimated)}
         custom={type !== "buy" ? 0 : 1}
       >
-        <Image src="/images/hero/hero.png" alt="" fill />
+        <Image src="/images/hero/hero.webp" alt="" fill />
       </motion.div>
 
       <div className="buttons-wrapper"></div>

@@ -13,7 +13,6 @@ export default async function Footer({lang}) {
   const preparedData = await getFetchData(URL_FOOTER);
   const data = useLanguageContent(preparedData, lang);
 
-  console.log(data);
 
   return (
       <DataProvider data={data}>

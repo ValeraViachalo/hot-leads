@@ -12,9 +12,9 @@ import { Button } from "@/utils/Button/Button";
 export default function AboutService({ type = "buy" }) {
   const { isActiveModal, setisActiveModal } = useContext(ModalContext);
   const { data: fullData } = useContext(DataContext);
-  
+
   // Get the right data based on section type
-  const {aboutService: data} = fullData;
+  const { aboutService: data } = fullData;
   const isBuy = type === "buy";
 
   const [isAnimated, setIsAnimated] = useState(false);
@@ -27,20 +27,34 @@ export default function AboutService({ type = "buy" }) {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setIsAnimated(latest === 1);
+    if (!isAnimated && latest === 1) {
+      setIsAnimated(latest === 1);
+    }
   });
 
   return (
-    <motion.section {...presenceAnim(aboutAnim, isAnimated)} className={`service-section-wrapper service-section--${type}`} ref={sectionRef} id="aboutService">
+    <motion.section
+      {...presenceAnim(aboutAnim, isAnimated)}
+      className={`service-section-wrapper service-section--${type}`}
+      ref={sectionRef}
+      id="aboutService"
+    >
       <div className={`service-section`}>
-        <motion.div className="service-section__doll"
-        {...presenceAnim(aboutAnim, isAnimated)}
-        custom={1}
+        <motion.div
+          className="service-section__doll"
+          {...presenceAnim(aboutAnim, isAnimated)}
+          custom={1}
         >
           <Image src={`/images/${type}Section/doll.webp`} alt="" fill />
         </motion.div>
-        <div className={classNames("top-titles uppercase", { "top-titles--right": !isBuy })}>
-          <span className={`fz--180 fz--mobile-60 ${isBuy ? "green" : "red"}`}>{type}</span>
+        <div
+          className={classNames("top-titles uppercase", {
+            "top-titles--right": !isBuy,
+          })}
+        >
+          <span className={`fz--180 fz--mobile-60 ${isBuy ? "green" : "red"}`}>
+            {type}
+          </span>
           <span className="fz--180 fz--mobile-60">{type}</span>
           <span className="fz--180 fz--mobile-60">{type}</span>
           <span className="fz--180 fz--mobile-60">{type}</span>
@@ -63,7 +77,10 @@ export default function AboutService({ type = "buy" }) {
               />
             </motion.div>
           ))}
-          <Button classes={`list-button ${isBuy ? "button--green" : ""}`} modalType="contact">
+          <Button
+            classes={`list-button ${isBuy ? "button--green" : ""}`}
+            modalType="contact"
+          >
             {data.button?.text}
           </Button>
         </div>

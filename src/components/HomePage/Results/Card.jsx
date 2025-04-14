@@ -1,20 +1,18 @@
+import React, { memo } from "react";
 import classNames from "classnames";
 import Image from "next/image";
-import React from "react";
-
 import "./Card.scss";
 
-export const Card = ({ data }) => {
+const CardComponent = ({ data }) => {
   const top = data?.top;
   return (
-    <div className={classNames("result-card", {
-      "result-card--buy": data.type === "buy",
-      "result-card--sell": data.type === "sell",
-    })}>
-      <div className="blur-bg"></div>
-      <div
-        className="result-card-wrapper"
-      >
+    <div
+      className={classNames("result-card", {
+        "result-card--buy": data.type === "buy",
+        "result-card--sell": data.type === "sell",
+      })}
+    >
+      <div className="result-card-wrapper">
         <div className="result-card__title fz--30 fz--mobile-30 bold uppercase">
           {data.type}
         </div>
@@ -35,7 +33,7 @@ export const Card = ({ data }) => {
               )}
             </div>
             <div className="right">
-              {top.type === "titleImage" && top.title?.image && (
+              {/* {top.type === "titleImage" && top.title?.image && (
                 <Image
                   src={top.title?.image}
                   alt=""
@@ -43,7 +41,7 @@ export const Card = ({ data }) => {
                   height={144}
                   className="right__image"
                 />
-              )}
+              )} */}
               {top.type === "doubleTitle" && (
                 <p className="right__text bold fz--40 fz--mobile-22">
                   {top.title?.secondTitle}
@@ -128,6 +126,7 @@ export const Card = ({ data }) => {
                   </div>
                 );
               }
+              return null;
             })}
           </div>
         </div>
@@ -135,3 +134,5 @@ export const Card = ({ data }) => {
     </div>
   );
 };
+
+export const Card = memo(CardComponent);

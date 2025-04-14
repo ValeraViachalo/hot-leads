@@ -8,7 +8,7 @@ import Hero from "./Hero/Hero";
 import AboutService from "./AboutService/AboutService";
 import ServiceCta from "./ServiceCta/ServiceCta";
 
-const HomePage = ({ type, lang="en" }) => {
+const HomePage = ({ type, lang = "en" }) => {
   return (
     <main className="home">
       <Header />
