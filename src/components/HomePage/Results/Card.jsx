@@ -10,7 +10,9 @@ export const Card = ({ data }) => {
     <div className={classNames("result-card", {
       "result-card--buy": data.type === "buy",
       "result-card--sell": data.type === "sell",
-    })}>
+    })}
+    style={{ backgroundImage: top.type === "titleImage" ? `url(${top.title?.image})` : "url(/images/results/red-bg.svg)" }}
+    >
       <div className="blur-bg"></div>
       <div
         className="result-card-wrapper"
@@ -35,7 +37,7 @@ export const Card = ({ data }) => {
               )}
             </div>
             <div className="right">
-              {top.type === "titleImage" && top.title?.image && (
+              {/* {top.type === "titleImage" && top.title?.image && (
                 <Image
                   src={top.title?.image}
                   alt=""
@@ -43,7 +45,7 @@ export const Card = ({ data }) => {
                   height={144}
                   className="right__image"
                 />
-              )}
+              )} */}
               {top.type === "doubleTitle" && (
                 <p className="right__text bold fz--40 fz--mobile-22">
                   {top.title?.secondTitle}

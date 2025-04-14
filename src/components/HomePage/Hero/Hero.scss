@@ -118,7 +118,6 @@
     height: 100vh;
     overflow: hidden;
 
-
     .hero__flame {
       &-1 {
         width: VW(568);
@@ -153,10 +152,10 @@
 
   .cards {
     position: absolute;
-    bottom: 0;
+    bottom: 2vw;
     left: 0;
     right: 0;
-    padding: 0 VW(100) VW(30);
+    padding: 0 VW(100) VW(30) VW(110);
 
     display: flex;
     gap: VW(30);
@@ -170,26 +169,30 @@
     }
 
     .card {
-      padding: VW(24) VW(40);
-
+      // padding: 0 VW(40);
+      width: VW(380);
+      // height: 10.161111vw;
+      height: VW(142);
       border-radius: VW(14);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
 
       position: relative;
 
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.06);
-      box-shadow: inset 0px 0px VW(68) rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(VW(20));
+      // background: rgba(255, 255, 255, 0.06);
+      // box-shadow: inset 0px 0px VW(68) rgba(255, 255, 255, 0.05);
+      // backdrop-filter: blur(VW(20));
+
+      background: no-repeat center/contain;
 
       @include forMobile {
         width: auto;
-        padding: VW(8, $mobile) VW(30, $mobile);
+        // padding: VW(8, $mobile) VW(30, $mobile);
+        height: VW(84, $mobile);
         border-radius: VW(14, $mobile);
-        backdrop-filter: blur(5vw);
+        // backdrop-filter: blur(5vw);
       }  
 
       &::after {
@@ -204,7 +207,13 @@
         gap: VW(8);
         position: relative;
         z-index: 2;
+        width: 12vw;
+        margin-left: VW(40);
         
+        @include forMobile {
+          width: 45vw;
+          margin-left: VW(20, $mobile);
+        }  
       }
 
       &__image {
