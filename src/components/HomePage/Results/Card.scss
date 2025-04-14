@@ -37,24 +37,13 @@
     .result-card__title {
       color: $green-100;
     }
-  }
-
-  .blur-bg {
-    width: VW(270);
-    height: VW(270);
-    background-color: var(--card-color);
-    position: absolute;
-    z-index: -2;
-    border-radius: 100vw;
-    filter: blur(10vw);
-    transition: opacity 0.3s ease;
-
-    @include forMobile {
-      width: VW(180, $mobile);
-      height: VW(180, $mobile);
-      filter: blur(15vw);
-      left: 25%;
-      top: -5%;
+    
+    &--buy {
+      background:  no-repeat center center;
+      --card-color: #00cf3c;
+      .result-card__title {
+        color: $green-100;
+      }
     }
   }
 

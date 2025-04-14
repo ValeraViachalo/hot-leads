@@ -6,13 +6,16 @@ import "./Card.scss";
 const CardComponent = ({ data }) => {
   const top = data?.top;
   return (
-    <div
-      className={classNames("result-card", {
-        "result-card--buy": data.type === "buy",
-        "result-card--sell": data.type === "sell",
-      })}
+    <div className={classNames("result-card", {
+      "result-card--buy": data.type === "buy",
+      "result-card--sell": data.type === "sell",
+    })}
+    style={{ backgroundImage: top.type === "titleImage" ? `url(${top.title?.image})` : "url(/images/results/red-bg.svg)" }}
     >
-      <div className="result-card-wrapper">
+      <div className="blur-bg"></div>
+      <div
+        className="result-card-wrapper"
+      >
         <div className="result-card__title fz--30 fz--mobile-30 bold uppercase">
           {data.type}
         </div>
