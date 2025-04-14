@@ -17,15 +17,17 @@ export default function ServiceCta({ type }) {
   const [isAnimated, setIsAnimated] = useState(true);
   const sectionRef = useRef(null);
 
-  // const { scrollYProgress } = useScroll({
-  //   target: sectionRef,
-  //   offset: ["10% 100%", "20% 100%"],
-  //   layoutEffect: false,
-  // });
+  const { scrollYProgress } = useScroll({
+    target: data && sectionRef,
+    offset: ["10% 100%", "50% 100%"],
+    layoutEffect: false,
+  });
 
-  // useMotionValueEvent(scrollYProgress, "change", (latest) => {
-  //   setIsAnimated(latest === 1);
-  // });
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (!isAnimated && latest === 1) {
+      setIsAnimated(true);
+    }
+  });
 
   return (
     <motion.section
@@ -77,7 +79,7 @@ export default function ServiceCta({ type }) {
       </div>
 
       <motion.div className="active-section__background">
-        <Image src="/images/buysell/buysell-bg.png" alt="" fill priority/>
+        <Image src="/images/buysell/buysell-bg.png" alt="" fill priority />
       </motion.div>
       <motion.div
         className="active-section__doll"

@@ -13,19 +13,17 @@ export default function FooterContent() {
   const [isAnimated, setIsAnimated] = useState(true);
   const footerRef = useRef(null);
 
-  // const { scrollYProgress } = useScroll({
-  //   target: footerRef,
-  //   offset: ["0% 100%", "40% 100%"],
-  //   layoutEffect: false,
-  // });
+  const { scrollYProgress } = useScroll({
+    target: footerRef,
+    offset: ["0% 100%", "40% 100%"],
+    layoutEffect: false,
+  });
 
-  // useMotionValueEvent(scrollYProgress, "change", (latest) => {
-  //   setIsAnimated(latest === 1);
-
-  //   // if ( && !isAnimated) {
-  //   //   setIsAnimated(true);
-  //   // }
-  // });
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (!isAnimated && latest === 1) {
+      setIsAnimated(latest === 1);
+    }
+  });
 
   return (
     <footer className="footer" ref={footerRef}>

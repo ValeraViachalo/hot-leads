@@ -8,19 +8,35 @@ import "swiper/css/effect-coverflow";
 import { DataContext } from "@/lib/providers/DataProvider/context";
 import { Card } from "../Card";
 import "./ResultsNew.scss";
-import { motion } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { aboutAnim, presenceAnim } from "@/lib/helpers/anim";
 
 const CustomSwiper = ({ customStyles = {} }) => {
   const { data } = useContext(DataContext);
   const { results } = data;
+  const sectionRef = useRef(null);
   const [isSafari, setIsSafari] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const sectionRef = useRef(null);
+
+  const [isAnimated, setIsAnimated] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: mounted && sectionRef,
+    offset: ["10% 100%", "20% 100%"],
+    layoutEffect: false,
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (!isAnimated && latest === 1) {
+      setIsAnimated(latest === 1);
+    }
+  });
 
   // Проверяем браузер
   useEffect(() => {
-    const safariCheck = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const safariCheck = /^((?!chrome|android).)*safari/i.test(
+      navigator.userAgent
+    );
     setIsSafari(safariCheck);
   }, []);
 
@@ -58,40 +74,38 @@ const CustomSwiper = ({ customStyles = {} }) => {
   };
 
   return (
-    <section className="results" ref={sectionRef} id="results">
-      <motion.span
-        {...presenceAnim(aboutAnim, true)}
-        className="results__title uppercase"
-      >
-        {results?.title}
-      </motion.span>
+    <motion.section
+      className="results"
+      ref={sectionRef}
+      id="results"
+      {...presenceAnim(aboutAnim, isAnimated)}
+    >
+      <span className="results__title uppercase">{results?.title}</span>
 
-      <motion.div
-        {...presenceAnim(aboutAnim, true)}
-        custom={1}
-        className="swiper-container"
-      >
+      <motion.div custom={1} className="swiper-container">
         <Swiper {...swiperParams}>
-          {[...results.list, ...results.list, ...results.list].map((item, index) => (
-            <SwiperSlide 
-              key={index} 
-              className="results-slide"
-              style={{
-                transform: isSafari ? "translateZ(0)" : "none"
-              }}
-            >
-              <div
-                className="results-slide__bg"
+          {[...results.list, ...results.list, ...results.list].map(
+            (item, index) => (
+              <SwiperSlide
+                key={index}
+                className="results-slide"
                 style={{
-                  backgroundColor: item.type === "buy" ? "green" : "red",
+                  transform: isSafari ? "translateZ(0)" : "none",
                 }}
-              />
-              <Card data={item} />
-            </SwiperSlide>
-          ))}
+              >
+                <div
+                  className="results-slide__bg"
+                  style={{
+                    backgroundColor: item.type === "buy" ? "green" : "red",
+                  }}
+                />
+                <Card data={item} />
+              </SwiperSlide>
+            )
+          )}
         </Swiper>
       </motion.div>
-    </section>
+    </motion.section>
   );
 };
 
