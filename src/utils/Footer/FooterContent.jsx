@@ -7,8 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { footerAnim, presenceAnim } from "@/lib/helpers/anim";
+import classNames from "classnames";
 
-export default function FooterContent() {
+export default function FooterContent({ type }) {
   const { data } = useContext(DataContext);
   const [isAnimated, setIsAnimated] = useState(true);
   const footerRef = useRef(null);
@@ -31,7 +32,11 @@ export default function FooterContent() {
         {...presenceAnim(footerAnim.doll, isAnimated)}
         className="footer__image"
       >
-        <Image src="/images/footer.png" fill alt="footer" />
+        <Image
+          src={type === "buy" ? "/images/footer/footer-buy.webp" : "/images/footer/footer.webp"}
+          fill
+          alt="footer"
+        />
       </motion.div>
       <div className="running-text__wrapper">
         <div className="running-text">
@@ -104,7 +109,10 @@ export default function FooterContent() {
               {...presenceAnim(footerAnim.title, isAnimated)}
               custom={index}
               key={index}
-              className="fz--58 fz--mobile-40 uppercase"
+              className={classNames("fz--58 fz--mobile-40 uppercase", {
+                red: type === "sell",
+                green: type === "buy",
+              })}
               dangerouslySetInnerHTML={{ __html: word }}
             />
           ))}
@@ -124,7 +132,12 @@ export default function FooterContent() {
           {...presenceAnim(footerAnim.opacity, isAnimated)}
           custom={0.7}
         >
-          <Button modalType="contact">{data.left.button.text}</Button>
+          <Button
+            classes={type === "buy" && "button--green"}
+            modalType="contact"
+          >
+            {data.left.button.text}
+          </Button>
         </motion.div>
       </div>
       <div className="right">

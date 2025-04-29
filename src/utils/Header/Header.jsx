@@ -16,7 +16,7 @@ import { ModalContext } from "@/lib/providers/ModalProvider/ModalProvider";
 import useIsDesktop from "@/lib/helpers/useIsDesktop";
 import { anim, headerAnim } from "@/lib/helpers/anim";
 
-export default function Header() {
+export default function Header({ type }) {
   const [data, setData] = useState(null);
   const isDesktop = useIsDesktop();
   const { isActiveModal, setisActiveModal } = useContext(ModalContext);
@@ -106,7 +106,9 @@ export default function Header() {
             {data.navlist?.map((currLink, index) => (
               <Link
                 key={`header_link_${index}`}
-                className="link"
+                className={classNames("link", {
+                  "link--red": type === "sell",
+                })}
                 href={currLink.link}
                 data-use-scroll={currLink.link}
               >
@@ -117,21 +119,30 @@ export default function Header() {
           <div className="lang-swith">
             <Link
               href={getLanguagePath("ua", path)}
-              className={classNames("link", { "link--active": lang === "ua" })}
+              className={classNames("link", {
+                "link--active": lang === "ua",
+                "link--red": type === "sell",
+              })}
             >
               ua
             </Link>
             <span>/</span>
             <Link
               href={getLanguagePath("ru", path)}
-              className={classNames("link", { "link--active": lang === "ru" })}
+              className={classNames("link", {
+                "link--active": lang === "ru",
+                "link--red": type === "sell",
+              })}
             >
               ru
             </Link>
             <span>/</span>
             <Link
               href={getLanguagePath("en", path)}
-              className={classNames("link", { "link--active": lang === "en" })}
+              className={classNames("link", {
+                "link--active": lang === "en",
+                "link--red": type === "sell",
+              })}
             >
               en
             </Link>

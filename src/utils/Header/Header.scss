@@ -112,6 +112,16 @@
     @include hover {
       color: $green-100;
     }
+    
+    &--red {
+      @include hover {
+        color: $r-70 !important;
+      }
+
+      &.link--active {
+        color: $r-70 !important;
+      }
+    }
 
     &--active {
       color: $green-100;

@@ -34,12 +34,12 @@ export default function Results() {
             prev: "results__arrow--prev",
             next: "results__arrow--next",
           },
-            breakpoints: {
-              800: {
-                perPage: 1,
-                padding: "10vw",
-              },
+          breakpoints: {
+            800: {
+              perPage: 1,
+              padding: "10vw",
             },
+          },
         }}
         hasTrack={false}
       >

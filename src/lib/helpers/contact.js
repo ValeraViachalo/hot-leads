@@ -6,7 +6,7 @@ export const sendContactMessage = async (values) => {
   const botToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
   const chatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
-  console.log('botToken', botToken, 'chatId', chatId);
+  // console.log('botToken', botToken, 'chatId', chatId);
   
 
   const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

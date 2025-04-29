@@ -11,12 +11,12 @@ import ServiceCta from "./ServiceCta/ServiceCta";
 const HomePage = ({ type, lang = "en" }) => {
   return (
     <main className="home">
-      <Header />
-      <Hero />
+      <Header type={type} />
+      <Hero type={type}/>
       <AboutService type={type} />
       <ServiceCta type={type} />
       <CustomSwiper />
-      <Footer lang={lang} />
+      <Footer lang={lang} type={type}/>
     </main>
   );
 };

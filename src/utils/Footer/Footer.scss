@@ -83,12 +83,16 @@
       padding-right: 0;
     }
 
-    .red {
+    &.red {
       color: $r-70;
     }
     
-    p:nth-of-type(3) {
+    .red:nth-of-type(3) {
       color: $r-70;
+    }
+    
+    .green:nth-of-type(3) {
+      color: $green-100;
     }
   }
 

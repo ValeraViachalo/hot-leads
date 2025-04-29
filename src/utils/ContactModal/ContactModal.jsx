@@ -11,8 +11,6 @@ import fullData from "./ContactContent.json";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { anim, animModal } from "@/lib/helpers/anim";
-import { toast } from "react-toastify";
-import axios from "axios";
 import { sendContactMessage } from "@/lib/helpers/contact";
 
 export default function ContactModal({ isActive, setIsActive }) {

@@ -9,14 +9,14 @@ import { DataProvider } from "@/lib/providers/DataProvider/DataProvider";
 import FooterContent from "./FooterContent";
 import { LocaleContext } from "@/lib/providers/LocaleContext/context";
 
-export default async function Footer({lang}) {
+export default async function Footer({lang, type}) {
   const preparedData = await getFetchData(URL_FOOTER);
   const data = useLanguageContent(preparedData, lang);
 
 
   return (
       <DataProvider data={data}>
-        <FooterContent />
+        <FooterContent type={type}/>
       </DataProvider>
   );
 }

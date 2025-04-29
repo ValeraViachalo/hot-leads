@@ -8,8 +8,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/utils/Button/Button";
 import { anim, heroAnim, heroAnin } from "@/lib/helpers/anim";
 import useIsDesktop from "@/lib/helpers/useIsDesktop";
+import classNames from "classnames";
 
-export default function Hero() {
+export default function Hero({ type }) {
   const { data } = useContext(DataContext);
   const { hero } = data;
   const isDesktop = useIsDesktop();
@@ -37,14 +38,22 @@ export default function Hero() {
       </motion.div>
       <motion.div {...anim(heroAnim.title)} className="title-wrapper">
         <Image
-          src="/images/hero/title.svg"
+          src={
+            type === "buy"
+              ? "/images/hero/title-buy.svg"
+              : "/images/hero/title-sell.svg"
+          }
           alt="Hot-leads"
           fill
           className="title"
           data-hide-for-mobile
         />
         <Image
-          src="/images/hero/title-mobile.svg"
+          src={
+            type === "buy"
+              ? "/images/hero/title-buy-mobile.svg"
+              : "/images/hero/title-sell-mobile.svg"
+          }
           alt="Hot-leads"
           fill
           className="title"
@@ -56,7 +65,12 @@ export default function Hero() {
             {...anim(heroAnim.cards)}
             custom={0}
           >
-            <Button modalType="contact">{hero.title.button}</Button>
+            <Button
+              classes={type === "buy" && "button--green"}
+              modalType="contact"
+            >
+              {hero.title.button}
+            </Button>
           </motion.div>
           <motion.p
             {...anim(heroAnim.cards)}
@@ -74,24 +88,30 @@ export default function Hero() {
             custom={index}
             key={`hero-card-${index}`}
             className="card uppercase"
-            style={{ backgroundImage: isDesktop ? `url(/images/CR${index}.png)` : `url(/images/mobile-CR${index}.png)` }}
+            style={{
+              backgroundImage:
+                type === "buy"
+                  ? isDesktop
+                    ? `url(/images/hero/CR${index}.png)`
+                    : `url(/images/hero/mobile-CR${index}.png)`
+                  : isDesktop
+                  ? `url(/images/hero/CR${index}-sell.png)`
+                  : `url(/images/hero/mobile-CR${index}-sell.png)`,
+            }}
           >
             <div className="card__text">
               <p className="fz--16 fz--mobile-14">{card.top}</p>
-              <p className="fz--20 fz--mobile-18 col-red">{card.title}</p>
+              <p
+                className={classNames("fz--20 fz--mobile-18", {
+                  "col-red": type === "sell",
+                  "col-green": type === "buy",
+                })}
+              >
+                {card.title}
+              </p>
             </div>
-            {/* <Image
-              src={card.image}
-              alt={card.title}
-              width={120}
-              height={120}
-              className="card__image"
-            /> */}
           </motion.div>
         ))}
-        {/* <Image src="/images/CR.png" width={383} height={142} className="hero-cards" />
-        <Image src="/images/CR1.png" width={383} height={142} className="hero-cards" />
-        <Image src="/images/CR3.png" width={383} height={142} className="hero-cards" /> */}
       </div>
     </section>
   );
