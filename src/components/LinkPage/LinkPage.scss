@@ -7,7 +7,7 @@
   display: flex;
 
   @include forMobile {
-    align-items: end;
+    align-items: flex-start;
   }
 
   &__link {
@@ -62,7 +62,7 @@
     pointer-events: none;
 
     @include forMobile {
-      bottom: 50vh;
+      bottom: 0vh;
     }
 
     &__title {
@@ -78,7 +78,7 @@
       z-index: -1;
 
       @include forMobile {
-        height: VW(600, $mobile);
+        height: VW(700, $mobile);
         width: VW(600, $mobile);
         overflow: hidden;
 
