@@ -39,8 +39,6 @@ export default function ContactModal({ isActive, setIsActive }) {
     });
   };
 
-  
-
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     console.log({ ...values, contactType });
     setSubmitting(false);

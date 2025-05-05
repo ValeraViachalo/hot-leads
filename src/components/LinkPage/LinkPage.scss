@@ -1,12 +1,13 @@
 .link-page {
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: flex;
 
   @include forMobile {
+    height: auto;
     align-items: flex-start;
   }
 
@@ -39,7 +40,7 @@
 
     @include forMobile {
       width: 100vw;
-      height: 50vh;
+      height: 50svh;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -83,7 +84,7 @@
         overflow: hidden;
 
         img {
-          top: VW(180, $mobile) !important;
+          top: VW(280, $mobile) !important;
         }
       }
     }
